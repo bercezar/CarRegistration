@@ -34,17 +34,7 @@ build/
 
 /src/main/java/application.properties
 /src/main/resources/application.properties
-# Ignora tudo
-*
 
-# Exceto essas pastas
-!src/
-!src/main/
-!src/main/java/
-!src/main/java/**
-!.gitignore
-
-# Continua ignorando essas partes
 src/main/resources/
 target/
 *.iml
