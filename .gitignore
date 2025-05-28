@@ -43,6 +43,6 @@ target/
 
 pom.xml
 .gitattributes
-.javadoc.xml
+javadoc.xml
 mvnw
 mvnw.cmd
