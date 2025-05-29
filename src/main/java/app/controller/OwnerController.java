@@ -57,6 +57,7 @@ public class OwnerController {
 		
 	}
 	
+	
 	@GetMapping("/findAll")
 	public ResponseEntity<List<Owner>> findAll(){
 		try {

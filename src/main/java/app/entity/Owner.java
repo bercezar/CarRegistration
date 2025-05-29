@@ -25,7 +25,6 @@ public class Owner {
 	private String name;
 	@Column(unique=true)
 	private String cpf;
-	
 
     @ManyToMany(mappedBy = "owners")
     private List<Car> cars;
