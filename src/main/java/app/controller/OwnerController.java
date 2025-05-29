@@ -1,5 +1,6 @@
 package app.controller;
-import java.util.List;  
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.dto.OwnerDTO;
 import app.entity.Owner;
 import app.service.OwnerService;
 
@@ -46,9 +48,9 @@ public class OwnerController {
 	}
 	
 	@GetMapping("/findByCpf/{cpf}")
-	public ResponseEntity<Owner> findByCpf(@PathVariable String cpf){
+	public ResponseEntity<OwnerDTO> findByCpf(@PathVariable String cpf){
 		try {
-			Owner owner = this.ownerService.findByCpf(cpf);
+			OwnerDTO owner = this.ownerService.findByCpf(cpf);
 			return new ResponseEntity<>(owner, HttpStatus.OK);
 			
 		}catch(Exception e){
@@ -59,9 +61,9 @@ public class OwnerController {
 	
 	
 	@GetMapping("/findAll")
-	public ResponseEntity<List<Owner>> findAll(){
+	public ResponseEntity<List<OwnerDTO>> findAll(){
 		try {
-			List<Owner> owners = this.ownerService.findAll();
+			List<OwnerDTO> owners = this.ownerService.findAll();
 			return new ResponseEntity<>(owners, HttpStatus.OK);
 			
 		}catch(Exception e){
@@ -81,9 +83,9 @@ public class OwnerController {
 	}
 	
 	@PutMapping("/update/{cpf}")
-	public ResponseEntity<Owner> update(@PathVariable String cpf, @RequestBody Owner owner) {
+	public ResponseEntity<OwnerDTO> update(@PathVariable String cpf, @RequestBody Owner owner) {
 	    try {
-	        Owner updated = ownerService.update(cpf, owner);
+	        OwnerDTO updated = this.ownerService.update(cpf, owner);
 	        return new ResponseEntity<>(updated, HttpStatus.OK);
 	    } catch (Exception e) {
 	        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -91,10 +93,10 @@ public class OwnerController {
 	}	
 	
 	@GetMapping("/findByName")
-	public ResponseEntity<List<Owner>> findByName(@RequestParam String name){
+	public ResponseEntity<List<OwnerDTO>> findByName(@RequestParam String name){
 		try{
-			List<Owner> listOwners = this.ownerService.findByName(name);
-			return new ResponseEntity<>(listOwners, HttpStatus.OK);
+			List<OwnerDTO> listOwnersDTO = this.ownerService.findByName(name);
+			return new ResponseEntity<>(listOwnersDTO, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}

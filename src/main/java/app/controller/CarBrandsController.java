@@ -1,5 +1,5 @@
 package app.controller;
-import java.util.List; 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.dto.CarBrandsDTO;
 import app.entity.CarBrands;
 import app.service.CarBrandsService;
 
@@ -46,10 +47,10 @@ public class CarBrandsController {
 	}
 	
 	@GetMapping("/findByCnpj/{cnpj}")
-	public ResponseEntity<CarBrands> findByCnpj(@PathVariable String cnpj){
+	public ResponseEntity<CarBrandsDTO> findByCnpj(@PathVariable String cnpj){
 		try {
-			CarBrands carBrands = this.carBrandsService.findByCnpj(cnpj);
-			return new ResponseEntity<CarBrands>(carBrands, HttpStatus.OK);
+			CarBrandsDTO carBrandsDTO = this.carBrandsService.findByCnpj(cnpj);
+			return new ResponseEntity<CarBrandsDTO>(carBrandsDTO, HttpStatus.OK);
 			
 		}catch(Exception e){
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -58,10 +59,10 @@ public class CarBrandsController {
 	}
 	
 	@GetMapping("/findAll")
-		public ResponseEntity<List<CarBrands>> findAll(){
+		public ResponseEntity<List<CarBrandsDTO>> findAll(){
 			try {
-				List<CarBrands> carsBrands = this.carBrandsService.findAll();
-				return new ResponseEntity<>(carsBrands, HttpStatus.OK);
+				List<CarBrandsDTO> carsBrandsDTO = this.carBrandsService.findAll();
+				return new ResponseEntity<>(carsBrandsDTO, HttpStatus.OK);
 				
 			}catch(Exception e){
 				return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -90,10 +91,10 @@ public class CarBrandsController {
 	}
 	
 	@GetMapping("/findByName")
-	public ResponseEntity<List<CarBrands>> findByName(@RequestParam String name){
+	public ResponseEntity<List<CarBrandsDTO>> findByName(@RequestParam String name){
 		try{
-			List<CarBrands> listCarsBrands = this.carBrandsService.findByName(name);
-			return new ResponseEntity<>(listCarsBrands, HttpStatus.OK);
+			List<CarBrandsDTO> listCarsBrandsDTO = this.carBrandsService.findByName(name);
+			return new ResponseEntity<>(listCarsBrandsDTO, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}

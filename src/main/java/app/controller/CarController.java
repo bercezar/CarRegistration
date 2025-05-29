@@ -1,6 +1,6 @@
 package app.controller;
 
-import java.util.List; 
+import java.util.List;  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.dto.CarDTO;
 import app.entity.Car;
 import app.service.CarService;
 
@@ -49,10 +50,10 @@ public class CarController {
 	}
 	
 	@GetMapping("/findByChassis")
-	public ResponseEntity<Car> findByChassis(@RequestParam String chassis){
+	public ResponseEntity<CarDTO> findByChassis(@RequestParam String chassis){
 		try {
-			Car car = this.carService.findByChassis(chassis);
-			return new ResponseEntity<Car>(car, HttpStatus.OK);
+			CarDTO carDTO = this.carService.findByChassis(chassis);
+			return new ResponseEntity<CarDTO>(carDTO, HttpStatus.OK);
 			
 		}catch(Exception e){
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -61,10 +62,10 @@ public class CarController {
 	} // Implementar melhorias no retorno, sem loops infinitos de serialização
 	
 	@GetMapping("/findAll")
-		public ResponseEntity<List<Car>> findAll(){
+		public ResponseEntity<List<CarDTO>> findAll(){
 			try {
-				List<Car> cars = this.carService.findAll();
-				return new ResponseEntity<>(cars, HttpStatus.OK);
+				List<CarDTO> carsDTO = this.carService.findAll();
+				return new ResponseEntity<>(carsDTO, HttpStatus.OK);
 				
 			}catch(Exception e){
 				return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -83,30 +84,30 @@ public class CarController {
 		}
 	
 	@PutMapping("/update/{chassis}")
-	public ResponseEntity<Car> update(@PathVariable String chassis, @RequestBody Car car) {
+	public ResponseEntity<CarDTO> update(@PathVariable String chassis, @RequestBody Car car) {
 	    try {
-	        Car updated = carService.update(chassis, car);
-	        return new ResponseEntity<>(updated, HttpStatus.OK);
+	        CarDTO updated = carService.update(chassis, car);
+	        return new ResponseEntity<CarDTO>(updated, HttpStatus.OK);
 	    } catch (Exception e) {
 	        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 	    }
 	}
-	
+
 	@GetMapping("/findByName")
-	public ResponseEntity<List<Car>> findByName(@RequestParam String name){
+	public ResponseEntity<List<CarDTO>> findByName(@RequestParam String name){
 		try{
-			List<Car> listCars = this.carService.findByName(name);
-			return new ResponseEntity<>(listCars, HttpStatus.OK);
+			List<CarDTO> listCarsDTO = this.carService.findByName(name);
+			return new ResponseEntity<>(listCarsDTO, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	} // Implementar melhorias no retorno, sem loops infinitos de serialização
 
 	@GetMapping("/findByCarBrands")
-	public ResponseEntity<List<Car>> findByCarBrands(@RequestParam Long idCarBrands){
+	public ResponseEntity<List<CarDTO>> findByCarBrands(@RequestParam Long idCarBrands){
 		try{
-			List<Car> listCars = this.carService.findByCarBrands(idCarBrands);
-			return new ResponseEntity<>(listCars, HttpStatus.OK);
+			List<CarDTO> listCarsDTO = this.carService.findByCarBrands(idCarBrands);
+			return new ResponseEntity<>(listCarsDTO, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
